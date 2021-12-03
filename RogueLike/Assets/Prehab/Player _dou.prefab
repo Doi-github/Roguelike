@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4788846118659646384}
   - component: {fileID: 2558214469709432}
   - component: {fileID: 4404435391303255760}
-  - component: {fileID: 4404435391303255767}
-  m_Layer: 0
+  - component: {fileID: -1539038752757854425}
+  m_Layer: 3
   m_Name: Player _dou
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4081169021911771730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 88.3728}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.92, y: 1.92}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &4404435391303255760
 Animator:
@@ -152,7 +152,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4404435391303255767
+--- !u!114 &-1539038752757854425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,6 +161,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4081169021911771730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462347f8197c6e24a8c84c4cfd9f4c0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d70b4ab2e10f384e8443225e75712bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 136
