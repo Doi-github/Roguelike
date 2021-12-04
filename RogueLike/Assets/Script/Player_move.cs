@@ -10,17 +10,31 @@ public class Player_move : MonoBehaviour
     Vector3 posi;
     Transform player_trnasform;
     public LayerMask blockingLayer;
+    public GameObject maincamera;
+    Transform camera_transform;
+    Vector3 came_posi;
 
     private BoxCollider2D boxCollider;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+
         player_trnasform = this.transform;
-        
         posi = player_trnasform.position;
         boxCollider = GetComponent<BoxCollider2D>();
+
+        maincamera = GameObject.Find("Main Camera");
+        camera_transform = maincamera.transform;
+        came_posi = camera_transform.position;
+
+        came_posi = posi;
+        came_posi.z = -10;
+        camera_transform.position = came_posi;
+
+
     }
 
     // Update is called once per frame
@@ -61,6 +75,11 @@ public class Player_move : MonoBehaviour
                 posi.x -= vel.x * Time.deltaTime;
 
                 player_trnasform.position = posi;
+
+                came_posi = camera_move(came_posi, -1 * vel.x * Time.deltaTime, 0);
+
+                camera_transform.position = came_posi;
+
             }
             
 
@@ -76,6 +95,11 @@ public class Player_move : MonoBehaviour
             {
                 posi.x += vel.x * Time.deltaTime;
                 player_trnasform.position = posi;
+
+                came_posi = camera_move(came_posi, vel.x * Time.deltaTime, 0);
+
+                camera_transform.position = came_posi;
+
             }
             
 
@@ -91,6 +115,9 @@ public class Player_move : MonoBehaviour
             {
                 posi.y += vel.y * Time.deltaTime;
                 player_trnasform.position = posi;
+                
+                came_posi = camera_move(came_posi, 0, vel.y * Time.deltaTime);
+                camera_transform.position = came_posi;
             }
             
         }
@@ -105,9 +132,23 @@ public class Player_move : MonoBehaviour
             {
                 posi.y -= vel.y * Time.deltaTime;
                 player_trnasform.position = posi;
+
+                came_posi = camera_move(came_posi, 0, -1 * vel.y * Time.deltaTime);
+                camera_transform.position = came_posi;
             }
                
         }
 
     }
+
+
+    Vector3 camera_move(Vector3 camera_posi, float dx,float dy)
+    {
+        camera_posi.y += dy;
+        camera_posi.x += dx;
+
+        return camera_posi;
+    }
+
 }
+

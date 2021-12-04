@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4404435391303255760}
   - component: {fileID: -1539038752757854425}
   m_Layer: 3
-  m_Name: Player _dou
+  m_Name: Player_dou
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,4 +166,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 8
