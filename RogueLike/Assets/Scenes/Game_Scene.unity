@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98bcb9e9be523984cb580e8c42cd3488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colums: 10
-  rows: 10
+  colums: 20
+  rows: 20
   Floar:
   - {fileID: 5829186883270342618, guid: 59fe5b936ce8b4d46bc4084557f7c457, type: 3}
   Wall:
