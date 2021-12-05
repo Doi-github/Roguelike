@@ -16,7 +16,7 @@ public class Map_Generation : MonoBehaviour
     public GameObject[] Exit;
     public GameObject[] Player;
     public GameObject[] map_tile;
-
+    public GameObject[] Room_tile;
 
     public void SetupScene()
     {
@@ -27,7 +27,7 @@ public class Map_Generation : MonoBehaviour
         maptile = map_tile[0];
 
         map_area.splitRondom();
-        map_area.map_Gene(map_tile);
+        map_area.map_Gene(map_tile,Room_tile);
 
     }
 
@@ -93,6 +93,7 @@ public class Map_Generation : MonoBehaviour
         public float y;
         public float width;
         public float height;
+        public Room room;
 
         public Area(Area p,Area[] c, float x, float y, float w, float h)
         {
@@ -148,21 +149,18 @@ public class Map_Generation : MonoBehaviour
             bool ok; 
             float d1 = (int)Math.Floor((double)UnityEngine.Random.Range(minwidth, t.width -minwidth));
             float d2 = (int)Math.Floor((double)UnityEngine.Random.Range(minwidth, t.height - minwidth));
-
-            
-           
-
+                                
             if (UnityEngine.Random.value > 0.5)
             {
                ok = t.splitX(d1);
-                Debug.Log("splitX");
-                Debug.Log(d1);
+                /*Debug.Log("splitX");
+                Debug.Log(d1);*/
             }
             else
             {
                ok = t.splitY(d2);
-                Debug.Log("splitY");
-                Debug.Log(d2);
+                /*Debug.Log("splitY");
+                Debug.Log(d2);*/
             }
 
             if (ok)
@@ -172,24 +170,33 @@ public class Map_Generation : MonoBehaviour
                     a.splitRondom();
                  }
             }
+            else
+            {
+                this.room = make_Room(this);
+            }
            
         }
 
-        public void map_Gene(GameObject[] map_tile)
+        public void map_Gene(GameObject[] map_tile ,GameObject[] room_tile)
         {
             GameObject maptile;
+            GameObject roomtile;
             maptile = map_tile[0];
+            roomtile = room_tile[0];
             if(this.child != null)
             {
                 foreach (Area a in this.child)
                 {
-                    a.map_Gene(map_tile);
+                    a.map_Gene(map_tile,room_tile);
                 }
             }
             else
             {
                 maptile.transform.localScale = new Vector3(this.width, this.height, 0);
                 Instantiate(maptile, new Vector3(this.x + this.width / 2, this.y + this.height / 2, 0), Quaternion.identity);
+
+                roomtile.transform.localScale = new Vector3(this.room.width, this.room.height, 0);
+                Instantiate(roomtile, new Vector3(this.room.x + this.room.width / 2, this.room.y + this.room.height / 2, 0), Quaternion.identity);
             }
             
         }
@@ -198,10 +205,10 @@ public class Map_Generation : MonoBehaviour
     
     public class Room
     {
-        float x;
-        float y;
-        float width;
-        float height;
+        public float x;
+        public float y;
+        public float width;
+        public float height;
         Area area;
 
         public Room(float x, float y, float width, float height, Area area)
@@ -215,5 +222,22 @@ public class Map_Generation : MonoBehaviour
 
     }
 
+    static Room make_Room(Area area)
+    {
+
+        float x;
+        float y;
+        float width;
+        float height;
+
+        width = (int)Math.Floor((double)UnityEngine.Random.Range(2, area.width - 2));
+        height = (int)Math.Floor((double)UnityEngine.Random.Range(2, area.height - 2));
+        x = area.x + (int)Math.Floor((double)UnityEngine.Random.Range(2,area.width -width));
+        y = area.y + (int)Math.Floor((double)UnityEngine.Random.Range(2, area.height - height));
+
+        Room room = new Room(x,y,width,height,area);
+
+        return room;
+    }
 
 }
