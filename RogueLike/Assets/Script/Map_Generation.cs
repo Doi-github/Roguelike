@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-
+using System.Linq;
 
 public class Map_Generation : MonoBehaviour
 {
@@ -23,11 +23,15 @@ public class Map_Generation : MonoBehaviour
         /*BoardSetup();*/
         Area map_area = new Area(null, null, -1, -1, colums, rows);
         GameObject maptile;
+        List<Room> rooms = new List<Room>();
 
         maptile = map_tile[0];
 
         map_area.splitRondom();
-        map_area.map_Gene(map_tile,Room_tile);
+        map_area.map_Gene(map_tile);
+        rooms = Roomlist(map_area,rooms);
+        Room_Gene(rooms,Room_tile);
+
 
     }
 
@@ -149,7 +153,8 @@ public class Map_Generation : MonoBehaviour
             bool ok; 
             float d1 = (int)Math.Floor((double)UnityEngine.Random.Range(minwidth, t.width -minwidth));
             float d2 = (int)Math.Floor((double)UnityEngine.Random.Range(minwidth, t.height - minwidth));
-                                
+            
+            
             if (UnityEngine.Random.value > 0.5)
             {
                ok = t.splitX(d1);
@@ -177,17 +182,17 @@ public class Map_Generation : MonoBehaviour
            
         }
 
-        public void map_Gene(GameObject[] map_tile ,GameObject[] room_tile)
+        public void map_Gene(GameObject[] map_tile)
         {
             GameObject maptile;
-            GameObject roomtile;
+            
             maptile = map_tile[0];
-            roomtile = room_tile[0];
+            
             if(this.child != null)
             {
                 foreach (Area a in this.child)
                 {
-                    a.map_Gene(map_tile,room_tile);
+                    a.map_Gene(map_tile);
                 }
             }
             else
@@ -195,8 +200,9 @@ public class Map_Generation : MonoBehaviour
                 maptile.transform.localScale = new Vector3(this.width, this.height, 0);
                 Instantiate(maptile, new Vector3(this.x + this.width / 2, this.y + this.height / 2, 0), Quaternion.identity);
 
-                roomtile.transform.localScale = new Vector3(this.room.width, this.room.height, 0);
+                /*roomtile.transform.localScale = new Vector3(this.room.width, this.room.height, 0);
                 Instantiate(roomtile, new Vector3(this.room.x + this.room.width / 2, this.room.y + this.room.height / 2, 0), Quaternion.identity);
+            */
             }
             
         }
@@ -224,7 +230,6 @@ public class Map_Generation : MonoBehaviour
 
     static Room make_Room(Area area)
     {
-
         float x;
         float y;
         float width;
@@ -240,4 +245,33 @@ public class Map_Generation : MonoBehaviour
         return room;
     }
 
+    public List<Room> Roomlist(Area area,List<Room> rooms)
+    {
+              
+        
+        if (area.child != null)
+        {
+            foreach (Area a in area.child)
+            {
+                Roomlist(a,rooms);
+            }
+
+        }
+        else
+        {
+            rooms.Add(area.room);
+        }
+        return  rooms;
+    }
+
+    public void Room_Gene(List<Room> rooms,GameObject[] room_tile)
+    {
+        GameObject roomtile = room_tile[0];
+        foreach(Room room in rooms)
+        {
+            roomtile.transform.localScale = new Vector3(room.width, room.height, 0);
+            Instantiate(roomtile, new Vector3(room.x + room.width / 2, room.y + room.height / 2, 0), Quaternion.identity);
+            
+        }
+    }
 }
