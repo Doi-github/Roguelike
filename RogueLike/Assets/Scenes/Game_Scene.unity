@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98bcb9e9be523984cb580e8c42cd3488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colums: 21
-  rows: 21
+  colums: 20
+  rows: 20
   Floar:
   - {fileID: 5829186883270342618, guid: 59fe5b936ce8b4d46bc4084557f7c457, type: 3}
   Wall:
@@ -167,6 +167,10 @@ MonoBehaviour:
   - {fileID: 4081169021911771730, guid: e08e9fc04fb73fb42a58be6bfc07c834, type: 3}
   map_tile:
   - {fileID: 1130157720205492472, guid: 3ec2ec4657302d547801d6283bf585da, type: 3}
+  Room_tile:
+  - {fileID: 4959754887963955739, guid: 807bdc1deed3f2849b1a3c6c0975e2fc, type: 3}
+  root_tile:
+  - {fileID: 5829186883270342618, guid: 59fe5b936ce8b4d46bc4084557f7c457, type: 3}
 --- !u!114 &457810472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +250,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 3.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -270,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729669580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -16.74}
   m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

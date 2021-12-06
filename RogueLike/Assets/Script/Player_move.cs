@@ -31,7 +31,7 @@ public class Player_move : MonoBehaviour
         came_posi = camera_transform.position;
 
         came_posi = posi;
-        came_posi.z = -10;
+        came_posi.z = -11;
         camera_transform.position = came_posi;
 
 
@@ -85,7 +85,7 @@ public class Player_move : MonoBehaviour
 
         }
         // ‰E‚ÉˆÚ“®
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             animator.SetInteger("x", 1);
             animator.SetInteger("y", 0);
@@ -105,7 +105,7 @@ public class Player_move : MonoBehaviour
 
         }
         // ‘O‚ÉˆÚ“®
-        if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
             animator.SetInteger("y", -1);
             animator.SetInteger("x", 0);
@@ -122,7 +122,7 @@ public class Player_move : MonoBehaviour
             
         }
         // Œã‚ë‚ÉˆÚ“®
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             animator.SetInteger("y", 1);
             animator.SetInteger("x", 0);
