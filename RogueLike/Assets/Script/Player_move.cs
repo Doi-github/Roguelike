@@ -63,6 +63,8 @@ public class Player_move : MonoBehaviour
     public void Move()
     {
         Vector2 vector2 = posi;
+        Vector2 vector3 = posi;
+        float dv = 0.3f;
         RaycastHit2D hit;
         if (Input.GetKey(KeyCode.A))
         {
@@ -70,7 +72,10 @@ public class Player_move : MonoBehaviour
             animator.SetInteger("y", 0);
             float dx = (float)(vel.x * Time.deltaTime + 0.5);
             vector2.x -=  dx;
-            if (can_move(posi,vector2,out hit))
+            vector3.x -= dx;
+            vector2.y = posi.y + dv;
+            vector3.y = posi.y - dv;
+            if (can_move(posi,vector2,out hit) && can_move(posi, vector3, out hit))
             {
                 posi.x -= vel.x * Time.deltaTime;
 
@@ -91,7 +96,11 @@ public class Player_move : MonoBehaviour
             animator.SetInteger("y", 0);
             float dx = (float)(vel.x * Time.deltaTime + 0.5);
             vector2.x += dx;
-            if (can_move(posi,vector2,out hit))
+            vector3.x += dx;
+            vector2.y = posi.y + dv;
+            vector3.y = posi.y - dv;
+
+            if (can_move(posi, vector2, out hit) && can_move(posi, vector3, out hit))
             {
                 posi.x += vel.x * Time.deltaTime;
                 player_trnasform.position = posi;
@@ -111,7 +120,10 @@ public class Player_move : MonoBehaviour
             animator.SetInteger("x", 0);
             float dy = (float)(vel.y * Time.deltaTime + 0.5);
             vector2.y += dy;
-            if(can_move(posi,vector2,out hit))
+            vector3.y += dy;
+            vector2.x = posi.x + dv;
+            vector3.x = posi.x - dv;
+            if (can_move(posi, vector2, out hit) && can_move(posi, vector3, out hit))
             {
                 posi.y += vel.y * Time.deltaTime;
                 player_trnasform.position = posi;
@@ -128,7 +140,10 @@ public class Player_move : MonoBehaviour
             animator.SetInteger("x", 0);
             float dy = (float)(vel.y * Time.deltaTime + 0.5);
             vector2.y -= dy;
-            if(can_move(posi,vector2,out hit))
+            vector3.y -= dy;
+            vector2.x = posi.x + dv;
+            vector3.x = posi.x - dv;
+            if (can_move(posi, vector2, out hit) && can_move(posi, vector3, out hit))
             {
                 posi.y -= vel.y * Time.deltaTime;
                 player_trnasform.position = posi;
