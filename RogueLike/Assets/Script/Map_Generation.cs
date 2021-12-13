@@ -46,7 +46,7 @@ public class Map_Generation : MonoBehaviour
     {
         BoardSetup();
 
-        Instantiate(Player[0], new Vector3(2, 2, 0), Quaternion.identity);
+        /*Instantiate(Player[0], new Vector3(2, 2, 0), Quaternion.identity);*/
     }
 
 
@@ -67,6 +67,7 @@ public class Map_Generation : MonoBehaviour
         /*PassageGene(level, root_tile);*/
         RoomToLevel(level, Floar, rooms);
         BoardGene(level, Wall, Floar);
+        Player_Gene(level,Player,colums,rows);
         /* Room_Gene(rooms, Room_tile);*/
     }
 
@@ -316,6 +317,25 @@ public class Map_Generation : MonoBehaviour
         }
     }
 
+    public void Player_Gene(Level level, GameObject[] Player, int colums,int rows)
+    {
+        while (true)
+        {
+            int p_x = (int)Math.Floor((double)UnityEngine.Random.Range(1, colums-1));
+            int p_y = (int)Math.Floor((double)UnityEngine.Random.Range(1, rows - 1));
+
+            int i = level.XYToIndex(p_x,p_y);
+
+            if (level.tile[i] == 0)
+            { 
+                Instantiate(Player[0], new Vector3(p_x, p_y, 0), Quaternion.identity);
+                break;
+            }
+           
+        }
+        
+    }
+
     public void BoardGene(Level level, GameObject[] Wall,GameObject[] Floar)
     {
         GameObject wall = Wall[0];
@@ -345,6 +365,7 @@ public class Map_Generation : MonoBehaviour
         }
 
     }
+
 
 
     public class Level
