@@ -13,7 +13,7 @@ public class Map_Generation : MonoBehaviour
     public GameObject[] Floar;
     public GameObject[] Wall;
     public GameObject[] Enemy;
-    public GameObject[] Exit;
+    public GameObject Exit;
     public GameObject[] Player;
     public GameObject[] map_tile;
     public GameObject[] Room_tile;
@@ -68,6 +68,7 @@ public class Map_Generation : MonoBehaviour
         RoomToLevel(level, Floar, rooms);
         BoardGene(level, Wall, Floar);
         Player_Gene(level,Player,colums,rows);
+        Exit_Gene(rooms, Exit);
         /* Room_Gene(rooms, Room_tile);*/
     }
 
@@ -336,6 +337,35 @@ public class Map_Generation : MonoBehaviour
         
     }
 
+    public void Exit_Gene( List<Room> rooms, GameObject Exit)
+    {
+        Room Exit_room;
+        for (int i = 0; i < rooms.Count(); i++)
+        {
+
+            if (rooms[i].area.child == null)
+            {
+                Exit_room = rooms[i];
+                int e_x = (int)Math.Floor((double)UnityEngine.Random.Range(Exit_room.x, Exit_room.x + Exit_room.width));
+        
+                int e_y = (int)Math.Floor((double)UnityEngine.Random.Range(Exit_room.y, Exit_room.y + Exit_room.height));
+
+        
+                Instantiate(Exit, new Vector3(e_x, e_y, 0), Quaternion.identity);
+                break;
+            }
+
+        }
+
+       
+
+    }
+   
+    public void Enemy_Gene( List<Room> rooms,GameObject[] Enemy)
+    {
+
+    }
+
     public void BoardGene(Level level, GameObject[] Wall,GameObject[] Floar)
     {
         GameObject wall = Wall[0];
@@ -366,7 +396,7 @@ public class Map_Generation : MonoBehaviour
 
     }
 
-
+    
 
     public class Level
     {
